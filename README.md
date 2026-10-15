@@ -33,6 +33,23 @@ Properties: `ApiKey`, `TextModel`, `ImageModel`, `ImageSize`, `SystemPrompt`.
 badly: the first needs a multipart upload of a file, the second needs a picture inline in
 the request. Both are one block here.
 
+## How it works
+
+Every call lives in `src/dev/pollinations/ai2/PollinationsApi.java`:
+
+| What | Call | Code |
+| --- | --- | --- |
+| Text, and questions about a picture | `POST {BASE}/v1/chat/completions` | `PollinationsApi.java:99`, `:240` |
+| Image as a URL | `POST {BASE}/v1/images/generations` with `response_format: "url"` | `PollinationsApi.java:121` |
+| Image as a file | `GET {BASE}/image/{prompt}?model=…&width=…&height=…` | `PollinationsApi.java:137` |
+| Speech to text | `POST {BASE}/v1/audio/transcriptions`, multipart upload | `PollinationsApi.java:176` |
+| Model lists | `GET {BASE}/text/models`, `GET {BASE}/image/models` | `PollinationsApi.java:307` |
+| Sign-in | `POST {ENTER}/api/device/code`, then `POST {ENTER}/api/device/token` | `PollinationsApi.java:254`, `:274` |
+
+`{BASE}` is `https://gen.pollinations.ai` and `{ENTER}` is `https://enter.pollinations.ai`
+(`PollinationsApi.java:31`, `:32`). The key travels in the `Authorization: Bearer` header, and
+the device flow mints it for the user, so the app ships without one.
+
 ## Install
 
 **MIT App Inventor** — open a project, then _Palette → Extension → Import extension_ and
