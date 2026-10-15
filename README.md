@@ -1,5 +1,7 @@
 # Pollinations for MIT App Inventor and Kodular
 
+[![Made with pollinations.ai](https://raw.githubusercontent.com/pollinations/pollinations/main/packages/ui/src/brand/badge-made-with.svg)](https://pollinations.ai/?ref=badge)
+
 One extension that gives an app text, images, speech-to-text, questions about a
 picture, and a sign-in so **no API key ships inside the app** — the user connects
 their own Pollinations account and pays with their own Pollen.
